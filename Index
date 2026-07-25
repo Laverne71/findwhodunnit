@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Whodunnit - Step Into the Scene of the Crime</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212; /* Deep charcoal */
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        .font-typewriter {
+            font-family: 'Courier Prime', monospace;
+            color: #d1d5db; /* Lighter gray for typewriter text */
+        }
+        .accent-color {
+            color: #ef4444; /* Neon Crimson */
+        }
+        .accent-bg {
+            background-color: #ef4444;
+        }
+        .accent-bg-hover:hover {
+            background-color: #dc2626;
+        }
+        
+        /* Hidden sections */
+        .hidden-section {
+            display: none;
+        }
+
+        /* Moody shadows */
+        .moody-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
+        }
+
+        .accordion-content {
+            display: none;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+        
+        input[type="text"], input[type="email"] {
+             background-color: #1f2937;
+             border: 1px solid #374151;
+             color: white;
+        }
+        input[type="text"]:focus, input[type="email"]:focus {
+             outline: none;
+             border-color: #ef4444;
+             box-shadow: 0 0 0 1px #ef4444;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="bg-black/90 sticky top-0 z-50 border-b border-gray-800 backdrop-blur-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 cursor-pointer" onclick="showSection('home')">
+                    <span class="text-2xl font-bold tracking-wider uppercase"><span class="accent-color">Find</span> Whodunnit</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <button onclick="showSection('home')" class="hover:text-red-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</button>
+                        <button onclick="showSection('book-one')" class="hover:text-red-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Case File #1</button>
+                        <!-- Hide reveal link from main nav -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ==================== HOME SECTION ==================== -->
+        <div id="home" class="block">
+            <!-- Hero -->
+            <div class="text-center py-16 md:py-24 border-b border-gray-800">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Step Into the Scene of the <span class="accent-color">Crime.</span></h1>
+                <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Immersive murder mystery puzzle books that turn you into the detective. Examine the evidence, cross-reference the suspects, and catch the killer.</p>
+                
+                <!-- Lead Magnet -->
+                <div class="bg-gray-900/50 p-8 rounded-lg max-w-md mx-auto moody-shadow border border-gray-800">
+                    <h3 class="text-2xl font-bold mb-4">Download Your First Case <span class="accent-color">Free</span></h3>
+                    <p class="text-sm text-gray-400 mb-6 font-typewriter">Enter your email to receive a mini puzzle book PDF directly to your inbox. Begin your training.</p>
+                    <form id="leadCaptureForm" class="space-y-4" onsubmit="handleLeadCapture(event)">
+                        <input type="email" id="leadEmail" placeholder="detective@agency.com" required class="w-full px-4 py-3 rounded-md">
+                        <button type="submit" class="w-full accent-bg accent-bg-hover text-white font-bold py-3 px-4 rounded-md transition-colors shadow-lg shadow-red-500/20">Send My Case File</button>
+                    </form>
+                    <p id="leadSuccessMsg" class="hidden text-green-400 mt-4 font-typewriter text-sm">Transmission sent. Check your inbox.</p>
+                </div>
+            </div>
+
+            <!-- Featured Book -->
+            <div class="py-16 grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-3xl font-bold mb-4 uppercase tracking-wider">Death on the Channel Express</h2>
+                    <p class="text-gray-400 mb-6 text-lg font-typewriter">Case File #1: 14th July, 1924.</p>
+                    <p class="mb-6">The Channel Express departed Victoria Station on time. By the time it arrived at Dover Marine, a man was dead in his first-class compartment. Natural causes, they said. The file was closed.</p>
+                    <p class="mb-8">They were wrong. You have the passenger register. You have the victim's secret notes. Now, find the killer.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#" target="_blank" class="accent-bg accent-bg-hover text-center font-bold py-3 px-6 rounded-md transition-colors shadow-lg shadow-red-500/20">Buy on Amazon</a>
+                        <button onclick="showSection('book-one')" class="bg-gray-800 hover:bg-gray-700 text-white text-center font-bold py-3 px-6 rounded-md transition-colors border border-gray-700">Enter the Investigation Hub</button>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center">
+                    <!-- Placeholder for Book Cover Image -->
+                    <div class="w-64 h-96 bg-gray-800 rounded-md moody-shadow flex items-center justify-center border border-gray-700 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-gray-700 to-black opacity-50"></div>
+                        <div class="z-10 text-center p-4">
+                            <span class="font-typewriter text-sm tracking-widest text-gray-400 block mb-2">EVIDENCE</span>
+                            <span class="font-bold text-2xl tracking-tighter">THE CHANNEL EXPRESS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How it works -->
+            <div class="py-16 border-t border-gray-800">
+                <h2 class="text-2xl font-bold mb-10 text-center">Standard Operating Procedure</h2>
+                <div class="grid sm:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <div class="text-4xl font-bold accent-color mb-4">1.</div>
+                        <h4 class="font-bold mb-2">Get the Book</h4>
+                        <p class="text-gray-400 text-sm">Secure the physical evidence file from Amazon KDP.</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold accent-color mb-4">2.</div>
+                        <h4 class="font-bold mb-2">Solve the Puzzles</h4>
+                        <p class="text-gray-400 text-sm">Cross-reference clues, eliminate suspects, find the truth.</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold accent-color mb-4">3.</div>
+                        <h4 class="font-bold mb-2">Unlock the Reveal</h4>
+                        <p class="text-gray-400 text-sm">Submit your answer here to unlock the killer's motive story.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== BOOK ONE HUB SECTION ==================== -->
+        <div id="book-one" class="hidden-section">
+            <div class="mb-8">
+                <button onclick="showSection('home')" class="text-sm text-gray-400 hover:text-white mb-4">&larr; Back to Archives</button>
+                <h1 class="text-4xl font-bold mb-2 uppercase tracking-wider">Death on the Channel Express</h1>
+                <p class="text-xl accent-color font-typewriter mb-8">Investigation Hub</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Left Column: The Briefing & Hints -->
+                <div class="md:col-span-2 space-y-8">
+                    
+                    <div class="bg-gray-900/40 p-6 rounded-md border border-gray-800">
+                        <h3 class="text-xl font-bold mb-4">Case Summary</h3>
+                        <p class="mb-4 font-typewriter text-gray-300">Mr Roland James Ashby, 61, found unresponsive in a first-class compartment. Cause of death recorded as cardiac failure. Case closed: 18th July 1924.</p>
+                        <p class="mb-4">You hold nine exhibits. You must apply them in order to the Southern Counties Railway Company Channel Express Passenger Register. Everything required to close this case is already in your hands.</p>
+                    </div>
+
+                    <!-- Accordion Hints -->
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Need a Hint?</h3>
+                        <p class="text-sm text-gray-400 mb-6">Spoilers below. Proceed with caution, detective.</p>
+                        
+                        <div class="space-y-4">
+                            <!-- Hint 1 -->
+                            <div class="border border-gray-800 rounded-md">
+                                <button class="w-full px-6 py-4 text-left font-bold bg-gray-900/50 hover:bg-gray-800 transition-colors flex justify-between items-center" onclick="toggleAccordion('hint1')">
+                                    <span>Exhibit A: The Diary</span>
+                                    <span class="text-2xl" id="icon-hint1">+</span>
+                                </button>
+                                <div id="hint1" class="accordion-content bg-black/50 px-6 py-4 font-typewriter text-gray-400 border-t border-gray-800">
+                                    "They are not among the third class passengers." Eliminate everyone travelling Third Class.
+                                </div>
+                            </div>
+                            
+                            <!-- Hint 2 -->
+                            <div class="border border-gray-800 rounded-md">
+                                <button class="w-full px-6 py-4 text-left font-bold bg-gray-900/50 hover:bg-gray-800 transition-colors flex justify-between items-center" onclick="toggleAccordion('hint2')">
+                                    <span>Exhibit B: Family Ties</span>
+                                    <span class="text-2xl" id="icon-hint2">+</span>
+                                </button>
+                                <div id="hint2" class="accordion-content bg-black/50 px-6 py-4 font-typewriter text-gray-400 border-t border-gray-800">
+                                    "They are not a family traveller... They travel with people who serve their purposes. Or they travel alone." Eliminate everyone travelling as 'Family'.
+                                </div>
+                            </div>
+
+                             <!-- Hint 3 -->
+                             <div class="border border-gray-800 rounded-md">
+                                <button class="w-full px-6 py-4 text-left font-bold bg-gray-900/50 hover:bg-gray-800 transition-colors flex justify-between items-center" onclick="toggleAccordion('hint3')">
+                                    <span>Exhibit C: Titles</span>
+                                    <span class="text-2xl" id="icon-hint3">+</span>
+                                </button>
+                                <div id="hint3" class="accordion-content bg-black/50 px-6 py-4 font-typewriter text-gray-400 border-t border-gray-800">
+                                    "Whatever title they carry, it is neither of those [Mrs or Miss]." Eliminate all entries with the title 'Mrs' or 'Miss'.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Forms -->
+                <div class="space-y-8">
+                    <!-- Submit Answer Form -->
+                    <div class="bg-gray-900 p-6 rounded-md border border-gray-800 moody-shadow relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-red-600"></div>
+                        <h3 class="text-xl font-bold mb-4">Submit Your Theory</h3>
+                        <p class="text-sm text-gray-400 mb-6">Think you've found the killer? Enter their <span class="text-white font-bold">Register Number</span> below to unlock the final confession.</p>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="guessId" class="block text-sm font-medium text-gray-400 mb-1">Surname and Register Number (e.g. LASSITER 14277)</label>
+                                <input type="text" id="guessId" class="w-full px-4 py-2 rounded-md font-typewriter text-lg tracking-widest text-center uppercase" placeholder="SURNAME NUMBER">
+                            </div>
+                            <button onclick="checkAnswer()" class="w-full accent-bg accent-bg-hover text-white font-bold py-3 px-4 rounded-md transition-colors shadow-lg">Verify Evidence</button>
+                        </div>
+                        <div id="guessFeedback" class="hidden mt-4 p-3 rounded bg-red-900/50 border border-red-500 text-red-200 text-sm font-typewriter">
+                            <!-- Feedback messages appear here -->
+                        </div>
+                    </div>
+
+                    <!-- Missing Pages Request -->
+                    <div class="bg-black/50 p-6 rounded-md border border-gray-800">
+                        <h3 class="text-lg font-bold mb-2">Missing Pages?</h3>
+                        <p class="text-xs text-gray-400 mb-4">If your physical file is damaged or missing pages, request digital replacements here.</p>
+                        <form onsubmit="handleMissingPages(event)" class="space-y-3">
+                            <input type="email" placeholder="Your Email" required class="w-full px-3 py-2 text-sm rounded-md">
+                            <input type="text" placeholder="Page Number(s) Missing" required class="w-full px-3 py-2 text-sm rounded-md">
+                            <button type="submit" class="w-full bg-gray-800 hover:bg-gray-700 text-white text-sm font-bold py-2 px-4 rounded-md transition-colors border border-gray-700">Request Pages</button>
+                        </form>
+                         <p id="missingPagesMsg" class="hidden text-green-400 mt-2 font-typewriter text-xs">Request logged. Replacements will be sent shortly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== REVEAL SECTION (HIDDEN) ==================== -->
+        <div id="reveal" class="hidden-section max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-green-500 font-typewriter tracking-widest text-sm mb-2 block">MATCH CONFIRMED</span>
+                <h1 class="text-5xl font-bold mb-4 uppercase tracking-wider text-white border-b border-gray-800 pb-8">The Confession</h1>
+            </div>
+
+            <div class="bg-gray-900 p-8 md:p-12 rounded-lg border border-gray-800 font-typewriter text-lg text-gray-300 leading-relaxed moody-shadow relative">
+                 <!-- Decorative tape elements -->
+                <div class="absolute top-[-10px] left-1/2 transform -translate-x-1/2 w-32 h-6 bg-yellow-900/20 backdrop-blur-md rotate-2 border border-yellow-700/30 shadow-sm"></div>
+
+                <p class="mb-6">You found me. Or rather, you found the ghost I left behind in that ledger.</p>
+                
+                <p class="mb-6">Ashby was a meticulous man. That was his reputation at the Foreign Office, and that was his fatal flaw. He couldn't let an anomaly pass without documenting it, categorizing it, tying a neat little bow around it. He noticed I wasn't travelling like the others. He noticed the absence of things—the absence of family, the absence of military rank, the absence of a title like 'Mrs' or 'Miss'.</p>
+                
+                <p class="mb-6">He saw the negative space around me and realized it formed a shape he recognized from his days in intelligence.</p>
+
+                <p class="mb-6">The documents he carried were supposed to go to Paris. They detailed a compromised network, names that had remained buried since 1919. If they reached his contact, my life—the quiet, comfortable, 'unremarkable' life I had meticulously built as a 'Gentleman' travelling for 'Commercial' purposes—would end.</p>
+                
+                <p class="mb-6">It wasn't malice. It was self-preservation. A swift administration of a digitalis derivative slipped into his tea while the train rattled through Kent. By the time we reached Dover Marine, it looked like a tired heart simply giving out.</p>
+
+                <p class="mb-8">He almost beat me from beyond the grave with those notes. But almost isn't good enough in this line of work. Still, I commend your logic, detective. You saw through the noise. You saw me.</p>
+
+                <div class="text-right italic text-gray-500 text-sm">
+                    — Register No. 14277, LASSITER, Mr, First Class, Pullman, 14 Jul, British, Merchant.
+                </div>
+            </div>
+
+            <!-- Teaser for next book -->
+            <div class="mt-16 text-center border-t border-gray-800 pt-16">
+                <h3 class="text-2xl font-bold mb-4">Ready for the Next Case?</h3>
+                <p class="text-gray-400 mb-6">The timeline shifts. The crime changes. The logic twists. Book Two arrives soon.</p>
+                <div class="inline-block bg-black p-4 rounded-md border border-dashed border-gray-600">
+                    <span class="block text-sm text-gray-500 mb-1 uppercase tracking-widest">Reward Code</span>
+                    <span class="font-typewriter text-2xl accent-color font-bold tracking-widest">LOGICGRID10</span>
+                    <span class="block text-xs mt-2">Use on Amazon for 10% off the next puzzle book.</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 mt-auto py-8 text-center text-gray-600 text-sm font-typewriter">
+        <p>&copy; 2026 Find Whodunnit. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Basic routing logic to show/hide sections
+        function showSection(sectionId) {
+            // Hide all sections
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('book-one').style.display = 'none';
+            document.getElementById('reveal').style.display = 'none';
+            
+            // Show requested section
+            document.getElementById(sectionId).style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        // Accordion logic for hints
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                icon.textContent = "+";
+            } else {
+                content.style.display = "block";
+                icon.textContent = "-";
+            }
+        }
+
+        // Logic for checking the guess
+        function checkAnswer() {
+            let guessInput = document.getElementById('guessId').value.trim().toUpperCase();
+            const feedbackEl = document.getElementById('guessFeedback');
+            
+            if(!guessInput) {
+                feedbackEl.innerHTML = "Please enter the Surname and Register Number.";
+                feedbackEl.style.display = "block";
+                return;
+            }
+
+            // Normalize input: remove any commas and extra spaces
+            guessInput = guessInput.replace(/,/g, '').replace(/\s+/g, ' ');
+
+            // The correct answer from the book
+            const correctAnswer1 = "LASSITER 14277"; 
+            const correctAnswer2 = "14277 LASSITER"; // Allow reverse order just in case
+            const masterKey = "0000"; // For testing
+
+            if (guessInput === correctAnswer1 || guessInput === correctAnswer2 || guessInput === masterKey) {
+                feedbackEl.style.display = "none";
+                // Show success state briefly then transition
+                document.getElementById('guessId').style.backgroundColor = '#166534'; // dark green
+                document.getElementById('guessId').style.color = '#fff';
+                
+                setTimeout(() => {
+                    document.getElementById('guessId').style.backgroundColor = ''; 
+                    showSection('reveal');
+                }, 800);
+                
+            } else {
+                feedbackEl.innerHTML = "INCORRECT. The evidence doesn't point there. Review the clues and the register again.";
+                feedbackEl.style.display = "block";
+            }
+        }
+
+        // Dummy handlers for forms (in a real WP setup, these connect to Forminator/Google Sheets)
+        function handleLeadCapture(e) {
+            e.preventDefault();
+            document.getElementById('leadCaptureForm').style.display = 'none';
+            document.getElementById('leadSuccessMsg').style.display = 'block';
+            // Here you would normally send the data via AJAX to your Make.com webhook or Forminator endpoint
+        }
+
+        function handleMissingPages(e) {
+            e.preventDefault();
+            e.target.reset();
+            const msg = document.getElementById('missingPagesMsg');
+            msg.style.display = 'block';
+            setTimeout(() => { msg.style.display = 'none'; }, 4000);
+        }
+    </script>
+</body>
+</html>
